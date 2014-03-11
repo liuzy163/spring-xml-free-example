@@ -1,0 +1,20 @@
+.problemform{
+	width: 370px;
+	font-size: 1.0em;
+	color: #333;
+}
+
+
+.problemform label {
+	color: #333;
+}
+
+
+.problemform label.error, label.error {
+	color: red;
+	font-style: italic
+}
+
+.problemform input {	border: 1px solid black; }
+.problemform input:focus { border: 1px dotted black; }
+.problemform input.error { border: 1px dotted red; }
