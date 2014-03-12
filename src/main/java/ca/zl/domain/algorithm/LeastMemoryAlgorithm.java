@@ -1,18 +1,14 @@
 package ca.zl.domain.algorithm;
 
-import org.apache.log4j.Logger;
-
 import ca.zl.domain.DataBean;
 import ca.zl.util.DataBeanHelper;
-import ca.zl.util.IntegerHelper;
+import ca.zl.util.NumbersListHelper;
 
 public class LeastMemoryAlgorithm implements Algorithm {
-	static final Logger logger = Logger.getLogger(LeastMemoryAlgorithm.class);
-
 	@Override
 	public DataBean solve(int[] numbers, int index) {
 		sort(numbers);
-		int[] result = IntegerHelper.removeDuplicates(numbers);
+		int[] result = NumbersListHelper.removeDuplicates(numbers);
 		return new DataBean(DataBeanHelper.fromNumbersToString(result),
 				result[index - 1]);
 	}
@@ -22,7 +18,9 @@ public class LeastMemoryAlgorithm implements Algorithm {
 	}
 
 	/**
-	 * See http://en.wikipedia.org/wiki/Heapsort The code below was copied from
+	 * See http://en.wikipedia.org/wiki/Heapsort.
+	 * 
+	 * The code below was copied from
 	 * http://www.code2learn.com/2011/09/heapsort-array-based-implementation
 	 * -in.html
 	 */

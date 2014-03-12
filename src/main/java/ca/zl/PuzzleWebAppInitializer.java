@@ -15,7 +15,7 @@ public class PuzzleWebAppInitializer implements WebApplicationInitializer {
 			throws ServletException {
 
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.register(PuzzleSolvingConfig.class);
+		context.register(PuzzleSolvingWebMvcConfig.class);
 
 		context.setServletContext(servletContext);
 

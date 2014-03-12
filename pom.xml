@@ -13,6 +13,14 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.0.0.RC4</version>
     </parent>
+    
+    <properties>
+        <start-class>ca.zl.PuzzleApplication</start-class>
+        <java.version>1.7</java.version>
+        <log4j.version>1.2.17</log4j.version>
+        <jackson-asl.version>1.9.11</jackson-asl.version>
+        <selenium.version>2.40.0</selenium.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -36,12 +44,12 @@
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.10</version>
+			<version>${jackson-asl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.10</version>
+			<version>${jackson-asl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -51,7 +59,7 @@
 		<dependency>
     		<groupId>log4j</groupId>
     		<artifactId>log4j</artifactId>
-    		<version>1.2.14</version>
+    		<version>${log4j.version}</version>
     		<type>jar</type>
     	<scope>compile</scope>
     	</dependency>
@@ -81,12 +89,25 @@
       		<version>3.2</version>
       		<scope>test</scope>
     	</dependency>
+    	<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-htmlunit-driver</artifactId>
+			<version>${selenium.version}</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
-
-    <properties>
-        <start-class>ca.zl.PuzzleApplication</start-class>
-        <java.version>1.7</java.version>
-    </properties>
 
     <build>
         <plugins>
@@ -101,6 +122,37 @@
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>
 			</plugin>
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-antrun-plugin</artifactId>
+        		<executions>
+        		  	<execution>
+      					<id>Start web app</id>
+      					<phase>pre-integration-test</phase>
+      					<configuration>
+        					<target>
+          						<java jar="${project.build.directory}/puzzle-1.0.0.war" fork="true" spawn="true" />
+        					</target>
+      					</configuration>
+      					<goals>
+        					<goal>run</goal>
+      					</goals>
+    				</execution>
+       			</executions>
+     		</plugin>
+			<plugin>
+        		<groupId>org.codehaus.mojo</groupId>
+        		<artifactId>failsafe-maven-plugin</artifactId>
+        		<version>2.4.3-alpha-1</version>
+        		<executions>
+          			<execution>
+            			<goals>
+              				<goal>integration-test</goal>
+              				<goal>verify</goal>
+            			</goals>
+          			</execution>
+        		</executions>
+      		</plugin>
         </plugins>
     </build>
 
@@ -117,7 +169,7 @@
 			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
 		<repository>
-			<id>EasyMock</id>
+			<id>mvn repo</id>
 			<url>http://mvnrepository.com/</url>
 		</repository>
     </repositories>

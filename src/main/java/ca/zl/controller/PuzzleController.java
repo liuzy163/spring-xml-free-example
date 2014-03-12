@@ -2,7 +2,6 @@ package ca.zl.controller;
 
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +18,6 @@ import ca.zl.service.ProblemSolvingService;
 
 @Controller
 public class PuzzleController {
-	static final Logger logger = Logger.getLogger(PuzzleController.class);
-
 	private final ProblemSolvingService problemSolvingService;
 
 	@Autowired
@@ -31,7 +28,8 @@ public class PuzzleController {
 	@RequestMapping(value = "/start", method = RequestMethod.GET)
 	@SimpleMethodLogging(beforeMessage = "Initializing", afterMessage = "New view point returned")
 	public ModelAndView getEmptyDataBean() {
-		return new ModelAndView("puzzle", "command", new ProblemDataBean());
+		ModelAndView modelAndView = new ModelAndView("puzzle", "command", new ProblemDataBean());
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/solution", method = RequestMethod.POST)
@@ -39,7 +37,6 @@ public class PuzzleController {
 	@SimpleMethodLogging
 	public DataBean solvePuzzle(@Valid @RequestBody ProblemDataBean dataBean)
 			throws UnsupportedComplexityException {
-		DataBean result = problemSolvingService.solve(dataBean);
-		return result;
+		return problemSolvingService.solve(dataBean);
 	}
 }

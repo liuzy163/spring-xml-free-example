@@ -2,19 +2,15 @@ package ca.zl.domain.algorithm;
 
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
-
 import ca.zl.domain.DataBean;
 import ca.zl.util.DataBeanHelper;
-import ca.zl.util.IntegerHelper;
+import ca.zl.util.NumbersListHelper;
 
 public class NlogNAlgorithm implements Algorithm {
-	static final Logger logger = Logger.getLogger(NlogNAlgorithm.class);
-
 	@Override
 	public DataBean solve(int[] numbers, int index) {
 		dualPivotQuicksort(numbers);
-		int[] result = IntegerHelper.removeDuplicates(numbers);
+		int[] result = NumbersListHelper.removeDuplicates(numbers);
 		return new DataBean(DataBeanHelper.fromNumbersToString(result),
 				result[index - 1]);
 	}

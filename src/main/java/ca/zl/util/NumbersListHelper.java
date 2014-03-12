@@ -9,7 +9,7 @@ import ca.zl.logging.SimpleMethodLogging;
 
 import com.google.common.primitives.Ints;
 
-public class IntegerHelper {
+public class NumbersListHelper {
 	@SimpleMethodLogging(level = LogLevel.INFO)
 	public static int[] removeDuplicates(int[] sortedNumbers) {
 		if (sortedNumbers.length < 1) {

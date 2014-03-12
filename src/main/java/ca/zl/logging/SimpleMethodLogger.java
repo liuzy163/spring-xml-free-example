@@ -30,14 +30,15 @@ public class SimpleMethodLogger {
 	}
 
 	@Around("execution(* ca.zl.domain.algorithm.Algorithm.solve(..))")
-	public void algorithmAroundAdvice(ProceedingJoinPoint joinPoint)
+	public Object algorithmAroundAdvice(ProceedingJoinPoint joinPoint)
 			throws Throwable {
 		Class<? extends Object> clazz = joinPoint.getTarget().getClass();
 		Logger logger = Logger.getLogger(clazz);
 		logger.log(Level.INFO,
 				"About to solve the puzzle of " + joinPoint.getArgs());
-		joinPoint.proceed();
+		Object result = joinPoint.proceed();
 		logger.log(Level.INFO, "Problem solved");
+		return result;
 	}
 
 	@AfterReturning(value = "@annotation(simpleMethodLogging)", argNames = "joinPoint,simpleMethodLogging, result", returning = "result")

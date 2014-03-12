@@ -1,6 +1,5 @@
 package ca.zl.service;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.stereotype.Service;
@@ -15,8 +14,6 @@ import ca.zl.util.DataBeanHelper;
 
 @Service
 public class ProblemSolvingServiceImpl implements ProblemSolvingService {
-	static final Logger logger = Logger
-			.getLogger(ProblemSolvingServiceImpl.class);
 
 	private final AlgorithmFactory algorithmFactory;
 
@@ -29,12 +26,10 @@ public class ProblemSolvingServiceImpl implements ProblemSolvingService {
 	@SimpleMethodLogging(level = LogLevel.INFO)
 	public DataBean solve(ProblemDataBean problem)
 			throws UnsupportedComplexityException {
-		String complexity = problem.getComplexity();
-		String numbers = problem.getNumbers();
-		Integer order = problem.getOrder();
-
-		Algorithm algorithm = algorithmFactory.createAlgorithm(complexity);
-		return algorithm.solve(DataBeanHelper.fromStringToNumbers(numbers),
-				order);
+		Algorithm algorithm = algorithmFactory.createAlgorithm(problem
+				.getComplexity());
+		return algorithm.solve(
+				DataBeanHelper.fromStringToNumbers(problem.getNumbers()),
+				problem.getOrder());
 	}
 }

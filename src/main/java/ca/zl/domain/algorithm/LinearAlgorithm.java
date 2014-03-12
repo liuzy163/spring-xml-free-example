@@ -1,18 +1,15 @@
 package ca.zl.domain.algorithm;
 
-import org.apache.log4j.Logger;
-
 import ca.zl.domain.DataBean;
 import ca.zl.util.DataBeanHelper;
-import ca.zl.util.IntegerHelper;
+import ca.zl.util.NumbersListHelper;
 
 public class LinearAlgorithm implements Algorithm {
-	static final Logger logger = Logger.getLogger(LinearAlgorithm.class);
 
 	@Override
 	public DataBean solve(int[] numbers, int index) {
 		bucketSort(numbers);
-		int[] result = IntegerHelper.removeDuplicates(numbers);
+		int[] result = NumbersListHelper.removeDuplicates(numbers);
 		return new DataBean(DataBeanHelper.fromNumbersToString(result),
 				result[index - 1]);
 	}
