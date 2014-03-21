@@ -12,7 +12,7 @@ public class NlogNAlgorithm implements Algorithm {
 		dualPivotQuicksort(numbers);
 		int[] result = NumbersListHelper.removeDuplicates(numbers);
 		return new DataBean(DataBeanHelper.fromNumbersToString(result),
-				result[index - 1]);
+				result[result.length - index]);
 	}
 
 	/**

@@ -50,13 +50,14 @@
         	success: function(solution) {       		
         		var respContent = "";        		
 		  		respContent += "<span class='success'>";
-		  		respContent += "The result list is " + solution.numbers + " \n ";
-		  		respContent += "And the "+order+ "th largest number is " + solution.order +  "</span>";
+		  		respContent += "The result list is " + solution.numbers;
+		  		respContent += ", and the "+order+ "th largest number is " + solution.order +  "</span>";
         		
         		$("#puzzleResult").html(respContent);   		
         	},
         	error: function(jqXHR, textStatus, errorThrown)
         	{
+        		$("#puzzleResult").html("");    		
         		var errorMessage = $.parseJSON(jqXHR.responseText).errorMessage;
             	alert(errorMessage);
             }
@@ -116,7 +117,7 @@
 	</tr>
     <tr>
         <td>
-            <input type="submit" value="Submit"/>
+            <input type="submit" value="Submit" name="submit"/>
         </td>
     </tr>
 </table>  

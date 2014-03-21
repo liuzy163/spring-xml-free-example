@@ -12,5 +12,4 @@ public class PuzzleApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PuzzleApplication.class, args);
 	}
-
 }

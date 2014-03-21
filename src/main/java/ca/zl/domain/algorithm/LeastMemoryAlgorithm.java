@@ -10,7 +10,7 @@ public class LeastMemoryAlgorithm implements Algorithm {
 		sort(numbers);
 		int[] result = NumbersListHelper.removeDuplicates(numbers);
 		return new DataBean(DataBeanHelper.fromNumbersToString(result),
-				result[index - 1]);
+				result[result.length - index]);
 	}
 
 	private void sort(int[] numbers) {

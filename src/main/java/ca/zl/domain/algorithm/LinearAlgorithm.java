@@ -11,7 +11,7 @@ public class LinearAlgorithm implements Algorithm {
 		bucketSort(numbers);
 		int[] result = NumbersListHelper.removeDuplicates(numbers);
 		return new DataBean(DataBeanHelper.fromNumbersToString(result),
-				result[index - 1]);
+				result[result.length - index]);
 	}
 
 	/**
